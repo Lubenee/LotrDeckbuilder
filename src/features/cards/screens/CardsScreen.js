@@ -24,7 +24,11 @@ const CardsScreen = () => {
       <FlatList
         data={filteredCards}
         keyExtractor={item => item.code}
-        renderItem={({item}) => <CardItem card={item} />}
+        renderItem={({item}) => <>
+        <CardItem card={item} /> 
+        <Divider/>
+        </>
+      }
       />
     </View>
   );
@@ -32,6 +36,7 @@ const CardsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 4,
   },
   background: {
     backgroundColor: 'black',

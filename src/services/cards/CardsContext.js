@@ -9,8 +9,8 @@ const CardsProvider = ({children}) => {
 
   useEffect(() => {
     CardsService.getAll().then(res => {
-      setCards(res.slice(0, 30));
-      setFilteredCards(res.slice(0, 30));
+      setCards(res);
+      setFilteredCards(res);
     });
   }, []);
 
