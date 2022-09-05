@@ -24,11 +24,12 @@ const CardsScreen = () => {
       <FlatList
         data={filteredCards}
         keyExtractor={item => item.code}
-        renderItem={({item}) => <>
-        <CardItem card={item} /> 
-        <Divider/>
-        </>
-      }
+        renderItem={({item}) => (
+          <>
+            <CardItem card={item} />
+            <Divider bold={true} style={{backgroundColor: 'black'}} />
+          </>
+        )}
       />
     </View>
   );

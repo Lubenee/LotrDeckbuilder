@@ -1,67 +1,102 @@
-import React, {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useState, useEffect, useMemo} from 'react';
 import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const cardBackgroundColor = 'white';
+
 const CardItem = ({card}) => {
+  const navigation = useNavigation();
 
   const source = `https://ringsdb.com/${card.imagesrc}`;
+  const cardText = card.text.replace(/<\/?[^>]+(>|$)/g, '');
 
-  const cardText = (card.text).replace(/<\/?[^>]+(>|$)/g, "");
+  const cardRight = useMemo(() => {
+    if (card.type_code === 'hero') {
+      return 31;
+    } else if (card.type_code === 'ally') {
+      return 28;
+    } else if (card.type_code === 'attachment') {
+      return 20;
+    } else {
+      return 31;
+    }
+  }, [card]);
+
+  const cardBottom = useMemo(() => {
+    if (card.type_code === 'attachment') {
+      return 8;
+    } else {
+      return 0;
+    }
+  }, [card]);
 
   return (
-<TouchableOpacity style = {styles.container} activeOpacity={0.5} onLongPress={() => {console.log(card)}}>
-      <Image source = {{uri: source}} style = {styles.logo}/>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={0.5}
+      onLongPress={() => {
+        console.log(card);
+      }}
+      onPress={() => navigation.navigate('CardScreen', {card: card})}>
+      <View
+        style={{borderRadius: 10, width: 67, height: 80, overflow: 'hidden'}}>
+        <Image
+          source={{uri: source}}
+          style={[styles.logo, {right: cardRight, bottom: cardBottom}]}
+        />
+      </View>
 
       <View style={styles.textContainer}>
-        <Text style = {styles.cardTitle}>{card.name}</Text>
+        <Text style={styles.cardTitle}>{card.name}</Text>
         <Text style={styles.cardDescription}>{cardText}</Text>
       </View>
-      <TouchableOpacity activeOpacity={0.5} onPress={() => {}} style={styles.button}>
-        <Icon name = 'ellipsis-v' size = {16} color = 'black' />
+
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => {}}
+        style={styles.button}>
+        <Icon name="ellipsis-v" size={16} color="black" />
       </TouchableOpacity>
-</TouchableOpacity>
+    </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 4,
+    marginVertical: 8,
   },
   textContainer: {
-    flex: 10,
+    flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    backgroundColor: cardBackgroundColor,
   },
   cardTitle: {
-    marginLeft: 10,
+    marginHorizontal: 8,
     color: 'black',
     fontSize: 18,
     alignSelf: 'flex-start',
     fontWeight: 'bold',
   },
   cardDescription: {
-    marginLeft: 4,
+    marginHorizontal: 8,
     color: 'black',
     fontSize: 12,
     textAlign: 'left',
-    backgroundColor:cardBackgroundColor,
   },
   button: {
-    flex: 1,
     alignItems: 'center',
     alignSelf: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 8,
   },
   logo: {
     width: 100,
     height: 140,
-    borderRadius: 10,
     resizeMode: 'contain',
     backgroundColor: cardBackgroundColor,
   },
