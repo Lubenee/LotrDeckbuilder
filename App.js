@@ -1,11 +1,11 @@
 import React from 'react';
 import CardsProvider from './src/services/cards/CardsContext';
-import AppNavigator from './src/infrastructure/navigation/AppNavigations';
+import {TabNavigator} from './src/infrastructure/navigation/TabNavigator';
 
 const App = () => {
   return (
     <CardsProvider>
-      <AppNavigator />
+      <TabNavigator />
     </CardsProvider>
   );
 };

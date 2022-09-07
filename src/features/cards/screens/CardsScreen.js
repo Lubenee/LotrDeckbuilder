@@ -1,11 +1,18 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Text, View, StyleSheet, FlatList, TextInput} from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  FlatList,
+  TextInput,
+  ActivityIndicator,
+} from 'react-native';
 import {Card, Divider} from 'react-native-paper';
 import {CardsContext} from '../../../services/cards/CardsContext';
 import CardItem from '../components/CardItem';
 
 const CardsScreen = () => {
-  const {filteredCards, search} = useContext(CardsContext);
+  const {filteredCards, search, isLoading} = useContext(CardsContext);
   const [query, setQuery] = useState('');
 
   const handleSearch = text => {
@@ -21,16 +28,21 @@ const CardsScreen = () => {
         placeholder="Search..."
         style={{backgroundColor: '#fff', paddingHorizontal: 20}}
       />
-      <FlatList
-        data={filteredCards}
-        keyExtractor={item => item.code}
-        renderItem={({item}) => (
-          <>
-            <CardItem card={item} />
-            <Divider bold={true} style={{backgroundColor: 'black'}} />
-          </>
-        )}
-      />
+      {isLoading ? (
+        <ActivityIndicator style={{marginTop: 20}} size={'large'} />
+      ) : (
+        <FlatList
+          data={filteredCards}
+          keyExtractor={item => item.code}
+          initialNumToRender={10}
+          renderItem={({item}) => (
+            <>
+              <CardItem card={item} />
+              <Divider bold={true} style={{backgroundColor: 'black'}} />
+            </>
+          )}
+        />
+      )}
     </View>
   );
 };

@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   StyleSheet,
@@ -9,18 +9,21 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Button} from 'react-native-paper';
+import {CardsContext} from '../../../services/cards/CardsContext';
 
 const CardScreen = ({route}) => {
   const {card} = route.params;
   const source = `https://ringsdb.com/${card.imagesrc}`;
   const cardText = card.text.replace(/<\/?[^>]+(>|$)/g, '');
   const navigation = useNavigation();
+  const {addToFavourites, removeFromFavourites, isCardFavourite} =
+    useContext(CardsContext);
 
   return (
     <View style={styles.mainContainer}>
       <ScrollView>
         <TouchableOpacity
-          onPress={() => navigation.navigate('ImageScreen', {source: source})}
+          onPress={() => navigation.navigate('Image', {source: source})}
           style={styles.imageContainer}>
           <Image source={{uri: source}} style={styles.logo} />
         </TouchableOpacity>
@@ -33,8 +36,12 @@ const CardScreen = ({route}) => {
         <View style={styles.buttonContainer}>
           <Button
             mode="contained-tonal"
-            icon="heart"
-            onPress={() => {}}
+            icon={isCardFavourite(card) ? 'heart' : 'heart-outline'}
+            onPress={() => {
+              isCardFavourite(card)
+                ? removeFromFavourites(card)
+                : addToFavourites(card);
+            }}
             style={styles.button}>
             Add to Favourites
           </Button>

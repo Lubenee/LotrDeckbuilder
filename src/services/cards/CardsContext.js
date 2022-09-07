@@ -4,13 +4,18 @@ import CardsService from './cards.service';
 export const CardsContext = createContext(null);
 
 const CardsProvider = ({children}) => {
+  const [favourites, setFavourites] = useState([]);
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
+  const [filteredFavourites, setFilteredFavourites] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     CardsService.getAll().then(res => {
-      setCards(res.slice(0, 30));
-      setFilteredCards(res.slice(0, 30));
+      setCards(res);
+      setFilteredCards(res);
+      setIsLoading(false);
     });
   }, []);
 
@@ -22,6 +27,16 @@ const CardsProvider = ({children}) => {
     });
 
     setFilteredCards(filteredData);
+  };
+
+  const searchFavourites = text => {
+    const formattedQuery = text.toLowerCase();
+
+    const filteredData = favourites.filter(card => {
+      return contains(card, formattedQuery);
+    });
+
+    setFilteredFavourites(filteredData);
   };
 
   const contains = ({name}, query) => {
@@ -36,8 +51,34 @@ const CardsProvider = ({children}) => {
     return false;
   };
 
+  const addToFavourites = card => {
+    setFavourites(favourites => [...favourites, card]);
+  };
+
+  const removeFromFavourites = card => {
+    setFavourites(favourites =>
+      favourites.filter(currentCard => currentCard.code !== card.code),
+    );
+  };
+
+  const isCardFavourite = card => {
+    return favourites.includes(card);
+  };
+
   return (
-    <CardsContext.Provider value={{cards, filteredCards, search}}>
+    <CardsContext.Provider
+      value={{
+        cards,
+        filteredCards,
+        filteredFavourites,
+        search,
+        favourites,
+        addToFavourites,
+        removeFromFavourites,
+        isCardFavourite,
+        searchFavourites,
+        isLoading,
+      }}>
       {children}
     </CardsContext.Provider>
   );

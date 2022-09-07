@@ -38,7 +38,7 @@ const CardItem = ({card}) => {
       onLongPress={() => {
         console.log(card);
       }}
-      onPress={() => navigation.navigate('CardScreen', {card: card})}>
+      onPress={() => navigation.navigate('Card', {card: card})}>
       <View
         style={{borderRadius: 10, width: 67, height: 80, overflow: 'hidden'}}>
         <Image
