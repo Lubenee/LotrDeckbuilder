@@ -7,8 +7,10 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeNavigator from './CardsNavigator';
 import DecksScreen from '../../features/cards/screens/DecksScreen';
 import FavouritesNavigator from './FavouritesNavigator';
+import DecksNavigator from './DeckNavigator';
 
 const Tab = createBottomTabNavigator();
+const SIZE = 22;
 
 export function TabNavigator() {
   return (
@@ -16,12 +18,12 @@ export function TabNavigator() {
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
-          tabBarLabelStyle: {fontSize: 14},
+          tabBarLabelStyle: {fontSize: 12},
         }}>
         <Tab.Screen
           options={{
             tabBarIcon: ({size, color}) => (
-              <FontAwesomeIcon name={'home'} color={color} size={size} />
+              <FontAwesomeIcon name={'home'} color={color} size={SIZE} />
             ),
           }}
           name="Home"
@@ -30,16 +32,16 @@ export function TabNavigator() {
         <Tab.Screen
           options={{
             tabBarIcon: ({size, color}) => (
-              <MaterialIcon name={'cards'} color={color} size={size} />
+              <MaterialIcon name={'cards'} color={color} size={SIZE} />
             ),
           }}
           name="Decks"
-          component={DecksScreen}
+          component={DecksNavigator}
         />
         <Tab.Screen
           options={{
             tabBarIcon: ({size, color}) => (
-              <FontAwesomeIcon name={'heart'} color={color} size={size} />
+              <FontAwesomeIcon name={'heart'} color={color} size={SIZE} />
             ),
           }}
           name="Favourites"

@@ -17,7 +17,9 @@ const CardItem = ({card}) => {
     } else if (card.type_code === 'ally') {
       return 28;
     } else if (card.type_code === 'attachment') {
-      return 20;
+      return 21;
+    } else if (card.type_code === 'event'){
+      return 29;
     } else {
       return 31;
     }
@@ -25,8 +27,13 @@ const CardItem = ({card}) => {
 
   const cardBottom = useMemo(() => {
     if (card.type_code === 'attachment') {
-      return 8;
-    } else {
+      return 4;
+    } else if (card.type_code === 'ally'){
+      return 1;
+    } else if (card.type_code === 'event'){
+      return 1
+    }
+    else {
       return 0;
     }
   }, [card]);

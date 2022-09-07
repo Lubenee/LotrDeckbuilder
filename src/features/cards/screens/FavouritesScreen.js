@@ -5,13 +5,13 @@ import {CardsContext} from '../../../services/cards/CardsContext';
 import CardItem from '../components/CardItem';
 
 const FavouritesScreen = () => {
-  const {FilteredFavourites, searchFavourites, favourites} =
+  const {filteredFavourites, searchFavourites, favourites} =
     useContext(CardsContext);
   const [query, setQuery] = useState('');
 
   const handleSearch = text => {
-    searchFavourites(text);
     setQuery(text);
+    searchFavourites(text);
   };
 
   return (
@@ -23,7 +23,7 @@ const FavouritesScreen = () => {
         style={{backgroundColor: '#fff', paddingHorizontal: 20}}
       />
       <FlatList
-        data={favourites}
+        data={filteredFavourites}
         keyExtractor={item => item.code}
         initialNumToRender={10}
         renderItem={({item}) => (

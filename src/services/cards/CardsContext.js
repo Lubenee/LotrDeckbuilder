@@ -6,15 +6,20 @@ export const CardsContext = createContext(null);
 const CardsProvider = ({children}) => {
   const [favourites, setFavourites] = useState([]);
   const [cards, setCards] = useState([]);
+  
   const [filteredCards, setFilteredCards] = useState([]);
   const [filteredFavourites, setFilteredFavourites] = useState([]);
+  
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
     CardsService.getAll().then(res => {
-      setCards(res);
-      setFilteredCards(res);
+      res = res.filter((card) => 
+        card.type_name !== 'Campaign'
+      )
+      setCards(res.slice(0, 5));
+      setFilteredCards(res.slice(0,5));
       setIsLoading(false);
     });
   }, []);
@@ -29,6 +34,10 @@ const CardsProvider = ({children}) => {
     setFilteredCards(filteredData);
   };
 
+  useEffect(() => {
+    setFilteredFavourites(favourites);
+  }, [favourites]);
+  
   const searchFavourites = text => {
     const formattedQuery = text.toLowerCase();
 

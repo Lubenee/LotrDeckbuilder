@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 8,
     backgroundColor: 'black',
   },
   image: {
@@ -27,4 +26,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
 });
+
 export default ImageScreen;

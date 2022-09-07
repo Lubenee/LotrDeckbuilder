@@ -1,13 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {
-  Text,
   View,
   StyleSheet,
   FlatList,
   TextInput,
   ActivityIndicator,
 } from 'react-native';
-import {Card, Divider} from 'react-native-paper';
+import {Divider} from 'react-native-paper';
 import {CardsContext} from '../../../services/cards/CardsContext';
 import CardItem from '../components/CardItem';
 

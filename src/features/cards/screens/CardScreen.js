@@ -31,6 +31,7 @@ const CardScreen = ({route}) => {
         <View style={styles.textContainer}>
           <Text style={styles.cardTitle}>{card.name}</Text>
           <Text style={styles.cardDescription}>{cardText}</Text>
+          <Text style={styles.cardDescription}>Expansion: {card.pack_name}</Text>
         </View>
 
         <View style={styles.buttonContainer}>
@@ -47,17 +48,17 @@ const CardScreen = ({route}) => {
           </Button>
           <Button
             mode="contained-tonal"
-            icon="cards-outline"
+            icon="cards"
             onPress={() => {}}
             style={styles.button}>
             Add to Deck
           </Button>
           <Button
             mode="contained-tonal"
-            icon="camera"
+            icon="sword-cross"
             onPress={() => {}}
             style={styles.button}>
-            View Expansion(?)
+            View Expansion
           </Button>
         </View>
       </ScrollView>
