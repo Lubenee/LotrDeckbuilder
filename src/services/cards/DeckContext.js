@@ -1,26 +1,29 @@
 import React, {createContext, useEffect, useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
 
 export const DeckContext = createContext(null);
 
 const DeckProvider = ({children}) => {
+  const [decks, setDecks] = useState([]);
 
-    const navigation = useNavigation();
+  const createNewDeck = (title, description) => {
+    const newDeck = {
+      title: title,
+      description: description,
+      content: [],
+    };
+    setDecks(decks => [...decks, newDeck]);
+    console.log('here');
+  };
 
-    const [decks, setDecks] = useState([]);
-    
-    const createNewDeck = () => {
-
-    }
-
-    return (
-        <DeckContext.Provider
-          value={{
-
-          }}>
-          {children}
-        </DeckContext.Provider>
-      );
-}
+  return (
+    <DeckContext.Provider
+      value={{
+        createNewDeck,
+        decks,
+      }}>
+      {children}
+    </DeckContext.Provider>
+  );
+};
 
 export default DeckProvider;

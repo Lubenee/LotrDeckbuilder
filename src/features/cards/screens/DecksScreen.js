@@ -1,36 +1,33 @@
-import React, { useContext } from 'react';
-import {Text, View, StyleSheet} from 'react-native';
-import { Card, Button } from 'react-native-paper';
-// import { DeckContext } from '../../../services/cards/DeckContext';
+import React, {useContext} from 'react';
+import {Text, View, StyleSheet, FlatList} from 'react-native';
+import {Card, Button} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
+import DeckItem from '../components/DeckItem';
+import DeckProvider from '../../../services/cards/DeckContext';
 
 const DecksScreen = () => {
   const navigation = useNavigation();
-  
+  const {decks} = useContext(DeckProvider);
+
   return (
     <View>
+      <FlatList
+        data={decks}
+        // keyExtractor={item => item.code}
+        renderItem={deck => {
+          <DeckItem />;
+        }}
+      />
+
       <Button
-            mode="contained-tonal"
-            icon="sword-cross"
-            onPress={() => {navigation.navigate('CreateDeck')}}
-            style={styles.button}>
-            Create new deck
-        </Button>
-        
-      <Card style={styles.card} mode='elevated'>
-          <Card.Cover
-            source='./tree.jpg'
-          />
-          <Card.Title title="Abandoned Ship" />
-          <Card.Content>
-            <Text>
-              The Abandoned Ship is a wrecked ship located on Route 108 in
-              Hoenn, originally being a ship named the S.S. Cactus. The second
-              part of the ship can only be accessed by using Dive and contains
-              the Scanner.
-            </Text>
-          </Card.Content>
-        </Card>
+        mode="contained-tonal"
+        icon="sword-cross"
+        onPress={() => {
+          navigation.navigate('CreateDeck');
+        }}
+        style={styles.button}>
+        Create new deck
+      </Button>
     </View>
   );
 };
