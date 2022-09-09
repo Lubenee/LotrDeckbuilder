@@ -31,7 +31,9 @@ const CardScreen = ({route}) => {
         <View style={styles.textContainer}>
           <Text style={styles.cardTitle}>{card.name}</Text>
           <Text style={styles.cardDescription}>{cardText}</Text>
-          <Text style={styles.cardDescription}>Expansion: {card.pack_name}</Text>
+          <Text style={styles.cardDescription}>
+            Expansion: {card.pack_name}
+          </Text>
         </View>
 
         <View style={styles.buttonContainer}>
@@ -49,7 +51,9 @@ const CardScreen = ({route}) => {
           <Button
             mode="contained-tonal"
             icon="cards"
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate('AddToDeck');
+            }}
             style={styles.button}>
             Add to Deck
           </Button>
