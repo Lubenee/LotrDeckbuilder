@@ -18,8 +18,8 @@ const CardsProvider = ({children}) => {
       res = res.filter((card) => 
         card.type_name !== 'Campaign'
       )
-      setCards(res.slice(0, 5));
-      setFilteredCards(res.slice(0,5));
+      setCards(res.slice(0 , 20));
+      setFilteredCards(res.slice(0 ,20));
       setIsLoading(false);
     });
   }, []);

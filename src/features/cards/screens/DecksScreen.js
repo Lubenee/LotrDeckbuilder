@@ -1,22 +1,22 @@
 import React, {useContext} from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
-import {Card, Button} from 'react-native-paper';
+import {Card, Button, Divider} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import DeckItem from '../components/DeckItem';
-import DeckProvider from '../../../services/cards/DeckContext';
+import { DeckContext } from '../../../services/cards/DeckContext';
 
 const DecksScreen = () => {
   const navigation = useNavigation();
-  const {decks} = useContext(DeckProvider);
+  const {decks} = useContext(DeckContext);
 
   return (
     <View>
       <FlatList
         data={decks}
-        // keyExtractor={item => item.code}
-        renderItem={deck => {
-          <DeckItem />;
-        }}
+        keyExtractor={deck => deck.title}
+        renderItem={({item}) => (
+            <DeckItem deck={item}/>
+        )}
       />
 
       <Button

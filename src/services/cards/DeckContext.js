@@ -12,14 +12,13 @@ const DeckProvider = ({children}) => {
       content: [],
     };
     setDecks(decks => [...decks, newDeck]);
-    console.log('here');
   };
 
   return (
     <DeckContext.Provider
       value={{
-        createNewDeck,
         decks,
+        createNewDeck,
       }}>
       {children}
     </DeckContext.Provider>

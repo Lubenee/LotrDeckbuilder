@@ -18,7 +18,7 @@ const CardItem = ({card}) => {
       return 28;
     } else if (card.type_code === 'attachment') {
       return 21;
-    } else if (card.type_code === 'event'){
+    } else if (card.type_code === 'event') {
       return 29;
     } else {
       return 31;
@@ -32,8 +32,7 @@ const CardItem = ({card}) => {
       return 1;
     } else if (card.type_code === 'event'){
       return 1
-    }
-    else {
+    } else {
       return 0;
     }
   }, [card]);
