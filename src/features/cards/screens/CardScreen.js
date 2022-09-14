@@ -52,7 +52,7 @@ const CardScreen = ({route}) => {
             mode="contained-tonal"
             icon="cards"
             onPress={() => {
-              navigation.navigate('AddToDeck');
+              navigation.navigate('AddToDeck', {card});
             }}
             style={styles.button}>
             Add to Deck

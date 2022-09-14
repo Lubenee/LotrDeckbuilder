@@ -15,13 +15,13 @@ const DecksScreen = () => {
         data={decks}
         keyExtractor={deck => deck.title}
         renderItem={({item}) => (
-            <DeckItem deck={item}/>
+            <DeckItem deck={item} screen='Decks'/>
         )}
       />
 
       <Button
         mode="contained-tonal"
-        icon="sword-cross"
+        icon="sword-cross"r
         onPress={() => {
           navigation.navigate('CreateDeck');
         }}

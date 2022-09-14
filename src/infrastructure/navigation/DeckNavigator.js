@@ -4,6 +4,7 @@ import CardScreen from '../../features/cards/screens/CardScreen';
 import ImageScreen from '../../features/cards/screens/ImageScreen';
 import DecksScreen from '../../features/cards/screens/DecksScreen';
 import CreateDeckScreen from '../../features/cards/screens/CreateDeckScreen';
+import DeckContentScreen from '../../features/cards/screens/DeckContentScreen'
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ const DecksNavigator = () => {
       }}>
       <Stack.Screen name="DecksList" component={DecksScreen} />
       <Stack.Screen name="Card" component={CardScreen} />
+      <Stack.Screen name="DeckContent" component={DeckContentScreen} />
       <Stack.Screen name="CreateDeck" component={CreateDeckScreen}/>
       <Stack.Screen name="Image" component={ImageScreen} />
     </Stack.Navigator>
