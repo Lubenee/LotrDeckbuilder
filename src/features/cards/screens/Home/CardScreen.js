@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Button} from 'react-native-paper';
-import {CardsContext} from '../../../services/cards/CardsContext';
+import {CardsContext} from '../../../../services/cards/CardsContext';
+import {CONTENT_SPACING} from '../../../../commons/constants';
 
 const CardScreen = ({route}) => {
   const {card} = route.params;
@@ -60,7 +61,9 @@ const CardScreen = ({route}) => {
           <Button
             mode="contained-tonal"
             icon="sword-cross"
-            onPress={() => {}}
+            onPress={() => {
+              navigation.navigate('Expansion', {expansion: card.pack_name});
+            }}
             style={styles.button}>
             View Expansion
           </Button>
@@ -85,26 +88,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    marginVertical: 8,
+    marginVertical: CONTENT_SPACING,
   },
   cardTitle: {
-    marginHorizontal: 8,
+    marginHorizontal: CONTENT_SPACING,
     color: 'white',
     fontSize: 24,
     fontWeight: 'bold',
   },
   cardDescription: {
-    marginHorizontal: 8,
+    marginHorizontal: CONTENT_SPACING,
     color: 'white',
     textAlign: 'center',
     fontSize: 16,
   },
   buttonContainer: {
-    marginVertical: 8,
+    marginVertical: CONTENT_SPACING,
     justifyContent: 'flex-start',
   },
   button: {
-    margin: 4,
+    margin: CONTENT_SPACING / 2,
   },
   logo: {
     width: 224,

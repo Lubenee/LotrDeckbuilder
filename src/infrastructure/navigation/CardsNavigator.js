@@ -1,9 +1,10 @@
 import React from 'react';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import CardsScreen from '../../features/cards/screens/CardsScreen';
-import CardScreen from '../../features/cards/screens/CardScreen';
+import CardsScreen from '../../features/cards/screens/Home/CardsScreen';
+import CardScreen from '../../features/cards/screens/Home/CardScreen';
 import ImageScreen from '../../features/cards/screens/ImageScreen';
-import AddToDeckScreen from '../../features/cards/screens/AddToDeckScreen';
+import AddToDeckScreen from '../../features/cards/screens/Home/AddToDeckScreen';
+import ExpansionScreen from '../../features/cards/screens/ExpansionScreen';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ const HomeNavigator = () => {
       <Stack.Screen name="Card" component={CardScreen} />
       <Stack.Screen name="AddToDeck" component={AddToDeckScreen} />
       <Stack.Screen name="Image" component={ImageScreen} />
+      <Stack.Screen name="Expansion" component={ExpansionScreen} />
     </Stack.Navigator>
   );
 };

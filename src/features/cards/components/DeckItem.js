@@ -1,23 +1,23 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Card} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
+import {DeckContext} from '../../../services/cards/DeckContext';
 
 const DeckItem = ({deck, screen, card}) => {
   const [source, setSource] = useState('');
+  const {addToDeck} = useContext(DeckContext);
   const navigation = useNavigation();
 
   const deckPressHandler = () => {
-    if(screen === 'AddToDeck'){
-      console.log("Came from add card to a deck screen!")
-      deck.content.push(card);
+    if (screen === 'AddToDeck') {
+      addToDeck(card, deck);
       navigation.goBack();
     } else if (screen === 'Decks') {
-      console.log("Came from decks screen!")
       navigation.navigate('DeckContent', {deck});
     }
-  }
+  };
 
   useEffect(() => {
     // if (deck.content.length !== 0) {
@@ -25,7 +25,7 @@ const DeckItem = ({deck, screen, card}) => {
     // } else {
     //   setSource(require('../../../../assets/images/back.jpg'));
     // }
-     setSource(require('../../../../assets/images/back.jpg'));
+    setSource(require('../../../../assets/images/back.jpg'));
   }, [deck.content]);
 
   return (

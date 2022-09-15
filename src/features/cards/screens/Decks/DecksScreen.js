@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
-import {Card, Button, Divider} from 'react-native-paper';
+import {View, StyleSheet, FlatList} from 'react-native';
+import {Button} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
-import DeckItem from '../components/DeckItem';
-import { DeckContext } from '../../../services/cards/DeckContext';
+import DeckItem from '../../components/DeckItem';
+import {DeckContext} from '../../../../services/cards/DeckContext';
 
 const DecksScreen = () => {
   const navigation = useNavigation();
@@ -14,14 +14,13 @@ const DecksScreen = () => {
       <FlatList
         data={decks}
         keyExtractor={deck => deck.title}
-        renderItem={({item}) => (
-            <DeckItem deck={item} screen='Decks'/>
-        )}
+        renderItem={({item}) => <DeckItem deck={item} screen="Decks" />}
       />
 
       <Button
         mode="contained-tonal"
-        icon="sword-cross"r
+        icon="sword-cross"
+        r
         onPress={() => {
           navigation.navigate('CreateDeck');
         }}

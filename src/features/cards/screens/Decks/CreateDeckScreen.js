@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import {Button} from 'react-native-paper';
-import {DeckContext} from '../../../services/cards/DeckContext';
+import {DeckContext} from '../../../../services/cards/DeckContext';
 import {useNavigation} from '@react-navigation/native';
 
 const CreateDeckScreen = () => {

@@ -1,8 +1,8 @@
 import React, {useContext, useState} from 'react';
 import {Text, View, StyleSheet, FlatList, TextInput} from 'react-native';
 import {Divider} from 'react-native-paper';
-import {CardsContext} from '../../../services/cards/CardsContext';
-import CardItem from '../components/CardItem';
+import {CardsContext} from '../../../../services/cards/CardsContext';
+import CardItem from '../../components/CardItem';
 
 const FavouritesScreen = () => {
   const {filteredFavourites, searchFavourites, favourites} =

@@ -1,11 +1,9 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import FavouritesScreen from '../../features/cards/screens/FavouritesScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import HomeNavigator from './CardsNavigator';
-import DecksScreen from '../../features/cards/screens/DecksScreen';
 import FavouritesNavigator from './FavouritesNavigator';
 import DecksNavigator from './DeckNavigator';
 

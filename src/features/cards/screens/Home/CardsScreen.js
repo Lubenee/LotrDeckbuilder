@@ -7,8 +7,8 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {Divider} from 'react-native-paper';
-import {CardsContext} from '../../../services/cards/CardsContext';
-import CardItem from '../components/CardItem';
+import {CardsContext} from '../../../../services/cards/CardsContext';
+import CardItem from '../../components/CardItem';
 
 const CardsScreen = () => {
   const {filteredCards, search, isLoading} = useContext(CardsContext);
