@@ -16,10 +16,10 @@ const HomeNavigator = () => {
         ...TransitionPresets.SlideFromRightIOS,
       }}>
       <Stack.Screen name="Cards" component={CardsScreen} />
-      <Stack.Screen name="Card" component={CardScreen} />
-      <Stack.Screen name="AddToDeck" component={AddToDeckScreen} />
-      <Stack.Screen name="Image" component={ImageScreen} />
       <Stack.Screen name="Expansion" component={ExpansionScreen} />
+      <Stack.Screen name="AddToDeck" component={AddToDeckScreen} />
+      <Stack.Screen name="Card" component={CardScreen} />
+      <Stack.Screen name="Image" component={ImageScreen} />
     </Stack.Navigator>
   );
 };
