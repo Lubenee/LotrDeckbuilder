@@ -9,24 +9,14 @@ import {
 import {Divider} from 'react-native-paper';
 import {CardsContext} from '../../../../services/cards/CardsContext';
 import CardItem from '../../components/CardItem';
+import SearchField from '../../components/SearchField';
 
 const CardsScreen = () => {
-  const {filteredCards, search, isLoading} = useContext(CardsContext);
-  const [query, setQuery] = useState('');
-
-  const handleSearch = text => {
-    search(text);
-    setQuery(text);
-  };
+  const {filteredCards, isLoading} = useContext(CardsContext);
 
   return (
     <View style={styles.container}>
-      <TextInput
-        value={query}
-        onChangeText={queryText => handleSearch(queryText)}
-        placeholder="Search..."
-        style={{backgroundColor: '#fff', paddingHorizontal: 20}}
-      />
+      <SearchField screen="Cards" />
       {isLoading ? (
         <ActivityIndicator style={{marginTop: 20}} size={'large'} />
       ) : (

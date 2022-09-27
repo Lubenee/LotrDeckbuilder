@@ -11,9 +11,10 @@ import {
   CARD_BACKGROUND_COLOR,
 } from '../../../commons/constants';
 
-const CardItem = ({card}) => {
+const CardItem = ({card, route}) => {
   const navigation = useNavigation();
-
+  const routes = navigation.getState()?.routes;
+  const prevRoute = routes[routes.length - 2]; // -2 because -1 is the current route
   const source = `https://ringsdb.com/${card.imagesrc}`;
 
   const cardRight = useMemo(() => {

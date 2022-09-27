@@ -3,25 +3,14 @@ import {Text, View, StyleSheet, FlatList, TextInput} from 'react-native';
 import {Divider} from 'react-native-paper';
 import {CardsContext} from '../../../../services/cards/CardsContext';
 import CardItem from '../../components/CardItem';
+import SearchField from '../../components/SearchField';
 
 const FavouritesScreen = () => {
-  const {filteredFavourites, searchFavourites, favourites} =
-    useContext(CardsContext);
-  const [query, setQuery] = useState('');
-
-  const handleSearch = text => {
-    setQuery(text);
-    searchFavourites(text);
-  };
+  const {filteredFavourites} = useContext(CardsContext);
 
   return (
     <View style={styles.container}>
-      <TextInput
-        value={query}
-        onChangeText={queryText => handleSearch(queryText)}
-        placeholder="Search..."
-        style={{backgroundColor: '#fff', paddingHorizontal: 20}}
-      />
+      <SearchField screen="Favourites" />
       <FlatList
         data={filteredFavourites}
         keyExtractor={item => item.code}
