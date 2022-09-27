@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
     height: 313,
     backgroundColor: 'black',
     resizeMode: 'contain',
-    backgroundColor: 'grey',
   },
 });
 
