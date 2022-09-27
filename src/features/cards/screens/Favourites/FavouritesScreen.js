@@ -1,5 +1,5 @@
-import React, {useContext, useState} from 'react';
-import {Text, View, StyleSheet, FlatList, TextInput} from 'react-native';
+import React, {useContext} from 'react';
+import {View, StyleSheet, FlatList} from 'react-native';
 import {Divider} from 'react-native-paper';
 import {CardsContext} from '../../../../services/cards/CardsContext';
 import CardItem from '../../components/CardItem';

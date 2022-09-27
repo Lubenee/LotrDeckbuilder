@@ -1,5 +1,6 @@
 import React, {createContext, useEffect, useState} from 'react';
 import CardsService from './cards.service';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const CardsContext = createContext(null);
 
@@ -37,6 +38,23 @@ const CardsProvider = ({children}) => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
+    setTimeout(
+      () =>
+        AsyncStorage.getItem('favourites').then(res => {
+          let fav = JSON.parse(res);
+
+          if (fav) {
+            setFavourites(fav);
+          }
+
+          setIsLoading(false);
+        }),
+      1,
+    );
+  }, []);
+
+  useEffect(() => {
     setFilteredFavourites(favourites);
   }, [favourites]);
 
@@ -63,13 +81,18 @@ const CardsProvider = ({children}) => {
   };
 
   const addToFavourites = card => {
-    setFavourites(favourites => [...favourites, card]);
+    let newFav = [...favourites, card];
+    setFavourites(newFav);
+
+    AsyncStorage.setItem('favourites', JSON.stringify(newFav));
   };
 
   const removeFromFavourites = card => {
-    setFavourites(favourites =>
-      favourites.filter(currentCard => currentCard.code !== card.code),
+    let newFav = favourites.filter(
+      currentCard => currentCard.code !== card.code,
     );
+    setFavourites(newFav);
+    AsyncStorage.setItem('favourites', JSON.stringify(newFav));
   };
 
   const isCardFavourite = card => {
