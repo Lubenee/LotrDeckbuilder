@@ -8,13 +8,15 @@ const CardsScreen = ({route}) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>{deck.title}</Text>
+      <Divider bold={true} />
       <FlatList
         data={deck.content}
         keyExtractor={item => item.code}
         initialNumToRender={10}
         renderItem={({item}) => (
           <>
-            <CardItem card={item} />
+            <CardItem card={item} screen={'Deck'} />
             <Divider bold={true} />
           </>
         )}
@@ -23,6 +25,11 @@ const CardsScreen = ({route}) => {
   );
 };
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 24,
+    alignSelf: 'center',
+    color: 'black',
+  },
   container: {
     flex: 1,
     padding: 4,

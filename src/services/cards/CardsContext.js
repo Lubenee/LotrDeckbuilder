@@ -16,7 +16,7 @@ const CardsProvider = ({children}) => {
   useEffect(() => {
     setIsLoading(true);
     CardsService.getAll().then(res => {
-      res = res.slice(0, 300); //{1309}, {800}
+      res = res.slice(0, 20); //{1309}, {800}
       res = res.filter(card => card.type_name !== 'Campaign');
       res.forEach(element => {
         element.text = element.text.replace(/<\/?[^>]+(>|$)/g, '');
@@ -81,9 +81,11 @@ const CardsProvider = ({children}) => {
   };
 
   const addToFavourites = card => {
+    if (isCardFavourite(card)) {
+      return;
+    }
     let newFav = [...favourites, card];
     setFavourites(newFav);
-
     AsyncStorage.setItem('favourites', JSON.stringify(newFav));
   };
 

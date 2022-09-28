@@ -11,10 +11,8 @@ import {
   CARD_BACKGROUND_COLOR,
 } from '../../../commons/constants';
 
-const CardItem = ({card, route}) => {
+const CardItem = ({card, screen}) => {
   const navigation = useNavigation();
-  const routes = navigation.getState()?.routes;
-  const prevRoute = routes[routes.length - 2]; // -2 because -1 is the current route
   const source = `https://ringsdb.com/${card.imagesrc}`;
 
   const cardRight = useMemo(() => {
@@ -62,7 +60,13 @@ const CardItem = ({card, route}) => {
         <Text style={styles.cardTitle}>{card.name}</Text>
         <Text style={styles.cardDescription}>{card.text}</Text>
       </View>
-      <View>{card.count >= 1 ? <Text>x{card.count}</Text> : void 0}</View>
+      <View>
+        {card.count >= 1 && screen == 'Deck' ? (
+          <Text>x{card.count}</Text>
+        ) : (
+          void 0
+        )}
+      </View>
     </TouchableOpacity>
   );
 };
