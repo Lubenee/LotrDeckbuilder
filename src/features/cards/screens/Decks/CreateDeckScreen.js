@@ -5,7 +5,7 @@ import {DeckContext} from '../../../../services/cards/DeckContext';
 import {useNavigation} from '@react-navigation/native';
 
 const CreateDeckScreen = () => {
-  const {createNewDeck} = useContext(DeckContext);
+  const {decks, createNewDeck} = useContext(DeckContext);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const navigation = useNavigation();
@@ -34,7 +34,11 @@ const CreateDeckScreen = () => {
         mode="contained-tonal"
         icon="cards"
         onPress={() => {
-          createNewDeck(title, description);
+          let index = 0;
+          if (decks.length !== 0) {
+            index = decks.length;
+          }
+          createNewDeck(title, description, index);
           setTitle('');
           setDescription('');
           navigation.goBack();

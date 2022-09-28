@@ -7,7 +7,7 @@ import {DeckContext} from '../../../services/cards/DeckContext';
 
 const DeckItem = ({deck, screen, card}) => {
   const [source, setSource] = useState('');
-  const {addToDeck} = useContext(DeckContext);
+  const {addToDeck, deleteDeck} = useContext(DeckContext);
   const navigation = useNavigation();
 
   const deckPressHandler = () => {
@@ -31,7 +31,7 @@ const DeckItem = ({deck, screen, card}) => {
   return (
     <TouchableOpacity
       onLongPress={() => {
-        console.log(deck);
+        deleteDeck(deck.index);
       }}
       onPress={deckPressHandler}>
       <Card style={styles.card} mode="elevated">

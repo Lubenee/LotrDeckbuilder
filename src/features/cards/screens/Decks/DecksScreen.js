@@ -13,7 +13,7 @@ const DecksScreen = () => {
     <View>
       <FlatList
         data={decks}
-        keyExtractor={deck => deck.title}
+        keyExtractor={deck => deck.index}
         renderItem={({item}) => <DeckItem deck={item} screen="Decks" />}
       />
 
