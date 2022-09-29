@@ -1,10 +1,24 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {createContext, useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const DeckContext = createContext(null);
 
 const DeckProvider = ({children}) => {
   const [decks, setDecks] = useState([]);
+
+  useEffect(() => {
+    setTimeout(
+      () =>
+        AsyncStorage.getItem('decks').then(res => {
+          let decks = JSON.parse(res);
+          console.log(decks);
+          if (decks) {
+            setDecks(decks);
+          }
+        }),
+      1,
+    );
+  }, []);
 
   const createNewDeck = (title, description, index) => {
     const newDeck = {
@@ -13,8 +27,9 @@ const DeckProvider = ({children}) => {
       content: [],
       index: index,
     };
-    setDecks(decks => [...decks, newDeck]);
-    //AsyncStorage.setItem('decks', JSON.stringify(newDeck));
+    const newDecks = [...decks, newDeck];
+    setDecks(newDecks);
+    AsyncStorage.setItem('decks', JSON.stringify(newDecks));
   };
 
   const addToDeck = (card, deck) => {
@@ -30,11 +45,10 @@ const DeckProvider = ({children}) => {
   };
 
   const deleteDeck = index => {
-    console.log(index);
     let newDecks = decks.filter(currentDeck => currentDeck.index !== index);
     setDecks(newDecks);
 
-    // AsyncStorage.setItem('decks', JSON.stringify(newDeck));
+    AsyncStorage.setItem('decks', JSON.stringify(newDecks));
   };
 
   return (
