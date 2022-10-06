@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {StyleSheet, Text} from 'react-native';
+import {Alert, StyleSheet, Text,} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Card} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
@@ -7,6 +7,7 @@ import {DeckContext} from '../../../services/cards/DeckContext';
 
 const DeckItem = ({deck, screen, card}) => {
   const [source, setSource] = useState('');
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const {addToDeck, deleteDeck} = useContext(DeckContext);
   const navigation = useNavigation();
 
@@ -28,10 +29,29 @@ const DeckItem = ({deck, screen, card}) => {
     setSource(require('../../../../assets/images/back.jpg'));
   }, [deck.content]);
 
+  const deletionAlert = async () => new Promise((resolve) => {
+    Alert.alert(
+      'Delete deck',
+      'wtf don\'t delete the poor deck :(',
+      [
+        {text: 'its trash man, im deleting it', onPress: () => {resolve(true)}},
+        {text: 'bruh k', onPress: () => {resolve(false)}},
+      ],
+      {
+        cancelable: true,
+        onDismiss: () => {resolve(false)}
+      }
+    )
+  });
+
   return (
     <TouchableOpacity
-      onLongPress={() => {
-        deleteDeck(deck.index);
+      onLongPress={async () => {
+        const userConfirmationToDeleteDeck = await deletionAlert();
+
+        if (userConfirmationToDeleteDeck){
+          deleteDeck(deck.index);
+        }
       }}
       onPress={deckPressHandler}>
       <Card style={styles.card} mode="elevated">

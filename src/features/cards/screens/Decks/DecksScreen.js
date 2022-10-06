@@ -20,7 +20,6 @@ const DecksScreen = () => {
       <Button
         mode="contained-tonal"
         icon="sword-cross"
-        r
         onPress={() => {
           navigation.navigate('CreateDeck');
         }}
