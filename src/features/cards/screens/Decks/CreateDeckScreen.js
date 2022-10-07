@@ -25,6 +25,7 @@ const CreateDeckScreen = () => {
           setDescription(text);
         }}
         numberOfLines={4}
+        multiline
         placeholder="Input deck Description..."
         textAlignVertical="top"
         style={{backgroundColor: '#fff', paddingHorizontal: 20, marginTop: 8}}
@@ -34,10 +35,18 @@ const CreateDeckScreen = () => {
         mode="contained-tonal"
         icon="cards"
         onPress={() => {
+          console.log(`decks len: ${decks.length}`)
           let index = 0;
           if (decks.length !== 0) {
             index = decks.length;
           }
+          decks.forEach(deck => {
+            if (index == deck.index){
+              index += 2;
+            }
+          })
+          console.log(index);
+
           createNewDeck(title, description, index);
           setTitle('');
           setDescription('');

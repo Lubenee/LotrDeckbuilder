@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, FlatList, Text} from 'react-native';
-import {Divider} from 'react-native-paper';
+import {Divider, SegmentedButtons, } from 'react-native-paper';
 import CardItem from '../../components/CardItem';
+import CardsSort from '../../components/CardsSort';
+import { CONTENT_SPACING } from '../../../../commons/constants';
 
-const CardsScreen = ({route}) => {
+
+const DeckContentScreen = ({route}) => {
   const {deck} = route.params;
 
   return (
@@ -37,6 +40,10 @@ const styles = StyleSheet.create({
   background: {
     backgroundColor: 'black',
   },
+  sortProps: {
+    alignItems: 'center',
+    padding: CONTENT_SPACING,
+  },
 });
 
-export default CardsScreen;
+export default DeckContentScreen;

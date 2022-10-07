@@ -11,12 +11,12 @@ const CardsProvider = ({children}) => {
   const [filteredCards, setFilteredCards] = useState([]);
   const [filteredFavourites, setFilteredFavourites] = useState([]);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
     CardsService.getAll().then(res => {
-      res = res.slice(0, 20); //{1309}, {800}
+      res = res.slice(0, 6); //{1309}, {800}
       res = res.filter(card => card.type_name !== 'Campaign');
       res.forEach(element => {
         element.text = element.text.replace(/<\/?[^>]+(>|$)/g, '');
@@ -38,17 +38,13 @@ const CardsProvider = ({children}) => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
     setTimeout(
       () =>
         AsyncStorage.getItem('favourites').then(res => {
           let fav = JSON.parse(res);
-
           if (fav) {
             setFavourites(fav);
           }
-
-          setIsLoading(false);
         }),
       1,
     );
@@ -101,6 +97,30 @@ const CardsProvider = ({children}) => {
     return favourites.includes(card);
   };
 
+  const sortBySphere = sphere => {
+    if (sphere === 'leadership'){
+      const filteredData = cards.filter(card => {
+        return card.sphere_code == 'leadership'
+      });
+      setFilteredCards(filteredData);
+    } else if (sphere === 'tactics'){
+      const filteredData = cards.filter(card => {
+        return card.sphere_code == 'tactics'
+      });
+      setFilteredCards(filteredData);
+    } else if (sphere ==='lore'){
+      const filteredData = cards.filter(card => {
+        return card.sphere_code == 'lore'
+      });
+      setFilteredCards(filteredData);
+    }else if (sphere === 'spirit'){
+      const filteredData = cards.filter(card => {
+        return card.sphere_code == 'spirit'
+      });
+      setFilteredCards(filteredData);
+    }
+  }
+
   return (
     <CardsContext.Provider
       value={{
@@ -114,6 +134,8 @@ const CardsProvider = ({children}) => {
         isCardFavourite,
         searchFavourites,
         isLoading,
+        sortBySphere,
+        
       }}>
       {children}
     </CardsContext.Provider>

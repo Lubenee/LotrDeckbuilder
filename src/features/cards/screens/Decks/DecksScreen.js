@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
-import {View, StyleSheet, FlatList} from 'react-native';
-import {Button} from 'react-native-paper';
+import {View, StyleSheet, FlatList, Modal, Text} from 'react-native';
+import {FAB,} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
 import DeckItem from '../../components/DeckItem';
 import {DeckContext} from '../../../../services/cards/DeckContext';
@@ -10,22 +10,20 @@ const DecksScreen = () => {
   const {decks} = useContext(DeckContext);
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={decks}
         keyExtractor={deck => deck.index}
+        nestedScrollEnabled = {true}
         renderItem={({item}) => <DeckItem deck={item} screen="Decks" />}
-      />
+        />
 
-      <Button
-        mode="contained-tonal"
-        icon="sword-cross"
-        onPress={() => {
-          navigation.navigate('CreateDeck');
-        }}
-        style={styles.button}>
-        Create new deck
-      </Button>
+        <FAB 
+        icon='plus' 
+        color='black' 
+        style = {styles.fab} 
+        mode='elevated' 
+        onPress={() => navigation.navigate('CreateDeck')} />
     </View>
   );
 };
@@ -34,21 +32,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  content: {
-    padding: 4,
-  },
-  card: {
-    margin: 4,
-  },
-  button: {
-    margin: 12,
-  },
-  preference: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingVertical: 12,
-    paddingHorizontal: 8,
-  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  }
 });
 
 export default DecksScreen;

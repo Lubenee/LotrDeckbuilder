@@ -11,7 +11,6 @@ const DeckProvider = ({children}) => {
       () =>
         AsyncStorage.getItem('decks').then(res => {
           let decks = JSON.parse(res);
-          console.log(decks);
           if (decks) {
             setDecks(decks);
           }
@@ -36,7 +35,6 @@ const DeckProvider = ({children}) => {
     if (deck.content.includes(card)) {
       const index = deck.content.indexOf(card);
       deck.content[index].count += 1;
-      console.log(deck.content[index].count);
     } else {
       deck.content.push(card);
       const index = deck.content.indexOf(card);
