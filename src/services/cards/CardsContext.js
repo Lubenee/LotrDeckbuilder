@@ -16,7 +16,7 @@ const CardsProvider = ({children}) => {
   useEffect(() => {
     setIsLoading(true);
     CardsService.getAll().then(res => {
-      res = res.slice(0, 6); //{1309}, {800}
+      res = res.slice(0, 30); //{1309}, {800}
       res = res.filter(card => card.type_name !== 'Campaign');
       res.forEach(element => {
         element.text = element.text.replace(/<\/?[^>]+(>|$)/g, '');
@@ -98,28 +98,28 @@ const CardsProvider = ({children}) => {
   };
 
   const sortBySphere = sphere => {
-    if (sphere === 'leadership'){
+    if (sphere === 'leadership') {
       const filteredData = cards.filter(card => {
-        return card.sphere_code == 'leadership'
+        return card.sphere_code == 'leadership';
       });
       setFilteredCards(filteredData);
-    } else if (sphere === 'tactics'){
+    } else if (sphere === 'tactics') {
       const filteredData = cards.filter(card => {
-        return card.sphere_code == 'tactics'
+        return card.sphere_code == 'tactics';
       });
       setFilteredCards(filteredData);
-    } else if (sphere ==='lore'){
+    } else if (sphere === 'lore') {
       const filteredData = cards.filter(card => {
-        return card.sphere_code == 'lore'
+        return card.sphere_code == 'lore';
       });
       setFilteredCards(filteredData);
-    }else if (sphere === 'spirit'){
+    } else if (sphere === 'spirit') {
       const filteredData = cards.filter(card => {
-        return card.sphere_code == 'spirit'
+        return card.sphere_code == 'spirit';
       });
       setFilteredCards(filteredData);
     }
-  }
+  };
 
   return (
     <CardsContext.Provider
@@ -135,7 +135,6 @@ const CardsProvider = ({children}) => {
         searchFavourites,
         isLoading,
         sortBySphere,
-        
       }}>
       {children}
     </CardsContext.Provider>

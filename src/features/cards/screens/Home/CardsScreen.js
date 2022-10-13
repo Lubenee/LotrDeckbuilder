@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, StyleSheet, FlatList, ActivityIndicator} from 'react-native';
 import {Divider} from 'react-native-paper';
-import { CONTENT_SPACING } from '../../../../commons/constants';
+import {CONTENT_SPACING} from '../../../../commons/constants';
 import {CardsContext} from '../../../../services/cards/CardsContext';
 import CardItem from '../../components/CardItem';
 import CardsSort from '../../components/CardsSort';
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   sortProps: {
     alignItems: 'center',
-    padding: CONTENT_SPACING,
+    padding: CONTENT_SPACING / 2,
   },
   background: {
     backgroundColor: 'black',

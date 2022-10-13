@@ -41,14 +41,13 @@ const DeckProvider = ({children}) => {
       deck.content[index].count = 1;
     }
 
-    
     AsyncStorage.setItem('decks', JSON.stringify(decks));
   };
 
   const removeFromDeck = (card, deck) => {
-
     AsyncStorage.setItem('decks', JSON.stringify(decks));
-  }
+  };
+
   const deleteDeck = index => {
     let newDecks = decks.filter(currentDeck => currentDeck.index !== index);
     setDecks(newDecks);

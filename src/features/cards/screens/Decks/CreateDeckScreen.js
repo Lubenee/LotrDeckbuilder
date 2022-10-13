@@ -35,7 +35,6 @@ const CreateDeckScreen = () => {
         mode="contained-tonal"
         icon="cards"
         onPress={() => {
-          console.log(`decks len: ${decks.length}`)
           let index = 0;
           if (decks.length !== 0) {
             index = decks.length;
@@ -45,7 +44,6 @@ const CreateDeckScreen = () => {
               index += 2;
             }
           })
-          console.log(index);
 
           createNewDeck(title, description, index);
           setTitle('');
