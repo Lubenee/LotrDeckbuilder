@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, FlatList, Text} from 'react-native';
-import {Divider, SegmentedButtons, } from 'react-native-paper';
+import {Divider} from 'react-native-paper';
 import CardItem from '../../components/CardItem';
-import CardsSort from '../../components/CardsSort';
-import { CONTENT_SPACING } from '../../../../commons/constants';
-
+import {CONTENT_SPACING} from '../../../../commons/constants';
 
 const DeckContentScreen = ({route}) => {
   const {deck} = route.params;
@@ -19,7 +17,7 @@ const DeckContentScreen = ({route}) => {
         initialNumToRender={10}
         renderItem={({item}) => (
           <>
-            <CardItem card={item} screen={'Deck'} />
+            <CardItem card={item} deck={deck} />
             <Divider bold={true} />
           </>
         )}

@@ -45,6 +45,21 @@ const DeckProvider = ({children}) => {
   };
 
   const removeFromDeck = (card, deck) => {
+    console.log("removed:  '" + card.name + "'  from deck:  " + deck.title);
+    let cardIndex = 0;
+
+    for (let i = 0; i < deck.content.length; ++i) {
+      if (card.code == deck.content[i].code) {
+        deck.content[i].count--;
+        cardIndex = i;
+        break;
+      }
+    }
+
+    if (deck.content[cardIndex].count == 0) {
+      deck.content.splice(cardIndex, 1);
+    }
+
     AsyncStorage.setItem('decks', JSON.stringify(decks));
   };
 

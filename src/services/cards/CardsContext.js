@@ -16,7 +16,7 @@ const CardsProvider = ({children}) => {
   useEffect(() => {
     setIsLoading(true);
     CardsService.getAll().then(res => {
-      res = res.slice(0, 30); //{1309}, {800}
+      res = res.slice(0, 700); //{1309}, {800}
       res = res.filter(card => card.type_name !== 'Campaign');
       res.forEach(element => {
         element.text = element.text.replace(/<\/?[^>]+(>|$)/g, '');

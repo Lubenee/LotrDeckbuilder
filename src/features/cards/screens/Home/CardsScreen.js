@@ -4,6 +4,7 @@ import {Divider} from 'react-native-paper';
 import {CONTENT_SPACING} from '../../../../commons/constants';
 import {CardsContext} from '../../../../services/cards/CardsContext';
 import CardItem from '../../components/CardItem';
+import CardList from '../../components/CardList';
 import CardsSort from '../../components/CardsSort';
 import SearchField from '../../components/SearchField';
 
@@ -34,6 +35,8 @@ const CardsScreen = () => {
     </View>
   );
 };
+//<CardList CardList={filteredCards} />
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

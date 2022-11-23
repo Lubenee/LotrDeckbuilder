@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useMemo, useState} from 'react';
+import React, {useContext, useEffect, useMemo, useState} from 'react';
 import {TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
 import {
   CONTENT_SPACING,
@@ -10,11 +10,18 @@ import {
   ACTIVE_BUTTON_OPACITY,
   CARD_BACKGROUND_COLOR,
 } from '../../../commons/constants';
+import {DeckContext} from '../../../services/cards/DeckContext';
 
-const CardItem = ({card, screen}) => {
+const CardItem = ({card, deck}) => {
   const navigation = useNavigation();
   const source = `https://ringsdb.com/${card.imagesrc}`;
   const [imageDirection, setImageDirection] = useState('Vertical');
+  const {removeFromDeck} = useContext(DeckContext);
+  let count = 0;
+
+  useEffect(() => {
+    count = card.count;
+  }, [card.count]);
 
   const cardRight = useMemo(() => {
     setImageDirection('Vertical');
@@ -57,6 +64,9 @@ const CardItem = ({card, screen}) => {
       activeOpacity={ACTIVE_BUTTON_OPACITY}
       onLongPress={() => {
         console.log(card);
+        if (deck != null) {
+          removeFromDeck(card, deck);
+        }
       }}
       onPress={() => navigation.navigate('Card', {card: card})}>
       <View
@@ -76,11 +86,7 @@ const CardItem = ({card, screen}) => {
       </View>
 
       <View style={styles.count}>
-        {card.count >= 1 && screen == 'Deck' ? (
-          <Text>x{card.count}</Text>
-        ) : (
-          void 0
-        )}
+        {card.count >= 1 && deck != null ? <Text>x{card.count}</Text> : void 0}
       </View>
     </TouchableOpacity>
   );
